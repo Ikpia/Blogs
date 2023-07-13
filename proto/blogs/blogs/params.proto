@@ -1,0 +1,12 @@
+syntax = "proto3";
+package blogs.blogs;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "blogs/x/blogs/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (gogoproto.goproto_stringer) = false;
+  
+}
