@@ -47,8 +47,6 @@ blogsd q blogs show-post 0
 //The 0 refers to the post/blog ID
 ```
 
-After a draft release is created, make your final changes from the release page and publish it.
-
 ## Release
 To release a new version of your blockchain, create and push a new tag with `v` prefix. A new draft release with the configured targets will be created.
 
