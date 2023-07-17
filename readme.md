@@ -25,6 +25,30 @@ npm run serve
 
 The frontend app is built using the `@starport/vue` and `@starport/vuex` packages. For details, see the [monorepo for Ignite front-end development](https://github.com/ignite/web).
 
+## Test Locally
+You can test locally on your system by following the commands
+
+To create a blog post:
+```
+blogsd tx blogs create-post hello world --from alice
+```
+
+To comment On a the blog post
+```
+blogsd tx blogs write-comment "Bob commented on Alice Post" 0 --from bob
+
+//There will be no comments shown by the user because he cannot comment on his blog except he comments on someone else blog
+```
+
+Show a Single Post
+```
+blogsd q blogs show-post 0
+
+//The 0 refers to the post/blog ID
+```
+
+After a draft release is created, make your final changes from the release page and publish it.
+
 ## Release
 To release a new version of your blockchain, create and push a new tag with `v` prefix. A new draft release with the configured targets will be created.
 
