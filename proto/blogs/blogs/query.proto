@@ -1,26 +1,75 @@
 syntax = "proto3";
+
 package blogs.blogs;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "blogs/blogs/params.proto";
+import "blogs/blogs/title.proto";
 
 option go_package = "blogs/x/blogs/types";
 
 // Query defines the gRPC querier service.
 service Query {
+  
   // Parameters queries the parameters of the module.
-  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/blogs/blogs/params";
+  
+  }
+  
+  // Queries a list of ShowPost items.
+  rpc ShowPost (QueryShowPostRequest) returns (QueryShowPostResponse) {
+    option (google.api.http).get = "/blogs/blogs/show_post/{id}";
+  
+  }
+  
+  // Queries a list of ListPost items.
+  rpc ListPost (QueryListPostRequest) returns (QueryListPostResponse) {
+    option (google.api.http).get = "/blogs/blogs/list_post";
+  
+  }
+  
+  // Queries a list of ListComment items.
+  rpc ListComment (QueryListCommentRequest) returns (QueryListCommentResponse) {
+    option (google.api.http).get = "/blogs/blogs/list_comment/{id}";
+  
   }
 }
-
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {
+  
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
 }
+
+message QueryShowPostRequest {
+  uint64 id = 1;
+}
+
+message QueryShowPostResponse {
+  Title title = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryListPostRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryListPostResponse {
+  Title                                  title      = 1;
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryListCommentRequest {
+  uint64 id = 1;
+}
+
+message QueryListCommentResponse {
+  Title title = 1;
+}
+
+
