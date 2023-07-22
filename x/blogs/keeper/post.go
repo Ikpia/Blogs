@@ -27,6 +27,7 @@ func (k Keeper) GetPostCount(ctx sdk.Context) uint64 {
 	return binary.BigEndian.Uint64(bz)
 }
 
+
 func GetPostIDBytes(id uint64) []byte {
 	bz := make([]byte, 8)
 	binary.BigEndian.PutUint64(bz, id)
@@ -51,8 +52,24 @@ func (k Keeper) GetPost(ctx sdk.Context, id uint64) (val types.Title, found bool
 	return val, true
 }
 
+func (k Keeper) GetComment(ctx sdk.Context, id uint64) (value types.Comment, find bool) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.CommentKey))
+	b := store.Get(GetPostIDBytes(id))
+	if b == nil {
+		return value, false
+	}
+	k.cdc.MustUnmarshal(b, &value)
+	return value, true
+}
+
 func (k Keeper) SetPost(ctx sdk.Context, post types.Title) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.PostKey))
+	b := k.cdc.MustMarshal(&post)
+	store.Set(GetPostIDBytes(post.Id), b)
+}
+
+func (k Keeper) SetComment(ctx sdk.Context, post types.Comment) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.CommentKey))
 	b := k.cdc.MustMarshal(&post)
 	store.Set(GetPostIDBytes(post.Id), b)
 }
