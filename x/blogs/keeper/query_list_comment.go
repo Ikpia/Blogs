@@ -5,6 +5,7 @@ import (
 
 	"blogs/x/blogs/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
@@ -17,7 +18,10 @@ func (k Keeper) ListComment(goCtx context.Context, req *types.QueryListCommentRe
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	// TODO: Process the query
-	_ = ctx
+	comment, found := k.GetComment(ctx, req.Id)
+	if !found {
+		return nil, sdkerrors.ErrKeyNotFound
+	}
 
-	return &types.QueryListCommentResponse{}, nil
+	return &types.QueryListCommentResponse{Comment:comment}, nil
 }

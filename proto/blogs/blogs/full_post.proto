@@ -1,0 +1,13 @@
+syntax = "proto3";
+package blogs.blogs;
+
+option go_package = "blogs/x/blogs/types";
+
+message FullPost {
+    string  title = 1;
+    string body = 2; 
+    string creator = 3; 
+    repeated string comment = 4;
+    uint64 id = 5; 
+
+}

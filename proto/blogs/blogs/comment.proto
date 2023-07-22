@@ -1,0 +1,9 @@
+syntax = "proto3";
+package blogs.blogs;
+
+option go_package = "blogs/x/blogs/types";
+
+message Comment {
+    repeated string comment = 1;
+    uint64 id = 2;
+  }

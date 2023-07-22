@@ -22,6 +22,14 @@ const (
 	PostCountKey = "Post/count"
 )
 
+const (
+	CommentKey = "Comment/value"
+)
+
+const (
+	CommentCountKey = "Comment/count"
+)
+
 func KeyPrefix(p string) []byte {
 	return []byte(p)
 }

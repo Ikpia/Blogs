@@ -10,7 +10,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func (k Keeper) ShowPost(goCtx context.Context, req *types.QueryShowPostRequest) (*types.QueryShowPostResponse, error) {
+func (k Keeper) ShowingPost(goCtx context.Context, req *types.QueryShowingPostRequest) (*types.QueryShowingPostResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
@@ -18,15 +18,24 @@ func (k Keeper) ShowPost(goCtx context.Context, req *types.QueryShowPostRequest)
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	// TODO: Process the query
-		post, found := k.GetPost(ctx, req.Id)
-		value, _ := k.GetComment(ctx, req.Id)
+	post, found := k.GetPost(ctx, req.Id)
+	comment, _ := k.GetComment(ctx, req.Id)
+	
+	
 	
 	if !found {
 		return nil, sdkerrors.ErrKeyNotFound
 	}
 
-	return &types.QueryShowPostResponse{
-		post,
-		value,
+	var fullpost = types.FullPost{
+		Title: post.Title,
+		Body: post.Body,
+		Creator: post.Creator, 
+		Comment: comment.Comment,
+		Id: req.Id,
+	} 
+
+	return &types.QueryShowingPostResponse{
+		fullpost,
 		}, nil
 }
