@@ -18,7 +18,7 @@ func (k msgServer) WriteComment(goCtx context.Context, msg *types.MsgWriteCommen
 	}
 	comments = append(comments, msg.Comment)
 	var post = types.Comment{
-		Id: value.Id,
+		Id: msg.Id,
 		Comment: comments,
 	}
 
