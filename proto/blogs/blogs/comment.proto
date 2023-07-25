@@ -2,8 +2,14 @@ syntax = "proto3";
 package blogs.blogs;
 
 option go_package = "blogs/x/blogs/types";
+//create a new schema that has only comment and creator field of both strings
+
+message Review {
+  string creator = 1;
+  string comment = 2;
+}
 
 message Comment {
-    repeated string comment = 1;
+    repeated Review content = 1;
     uint64 id = 2;
   }

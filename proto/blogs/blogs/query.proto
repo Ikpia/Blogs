@@ -63,6 +63,7 @@ message QueryShowPostRequest {
 message QueryShowPostResponse {
   Title title = 1 [(gogoproto.nullable) = false];
   Comment comment = 2 [(gogoproto.nullable) = false];
+  repeated string write = 3 [(gogoproto.nullable) = false];
 }
 
 message QueryListPostRequest {
