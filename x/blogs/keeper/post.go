@@ -68,8 +68,20 @@ func (k Keeper) SetPost(ctx sdk.Context, post types.Title) {
 	store.Set(GetPostIDBytes(post.Id), b)
 }
 
-func (k Keeper) SetComment(ctx sdk.Context, post types.Comment) {
+func (k Keeper) SetCommentId(ctx sdk.Context, comments types.Comment) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.CommentKey))
-	b := k.cdc.MustMarshal(&post)
-	store.Set(GetPostIDBytes(post.Id), b)
+	b := k.cdc.MustMarshal(&comments)
+	store.Set(GetPostIDBytes(comments.Id), b)
+}
+
+func (k Keeper) SetComment(ctx sdk.Context, content types.Comment, comment types.Review) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.CommentKey))
+	existing_comment := store.Get(GetPostIDBytes(content.Id))
+	if existing_comment != nil {
+		k.cdc.MustUnmarshal(existing_comment, &content)
+		content.Content = append(content.Content, &comment)
+		modified_comment := k.cdc.MustMarshal(&content)
+		store.Set(GetPostIDBytes(content.Id), modified_comment)
+	}
+	
 }

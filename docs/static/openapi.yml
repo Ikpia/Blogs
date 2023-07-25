@@ -17,10 +17,15 @@ paths:
               comment:
                 type: object
                 properties:
-                  comment:
+                  content:
                     type: array
                     items:
-                      type: string
+                      type: object
+                      properties:
+                        creator:
+                          type: string
+                        comment:
+                          type: string
                   id:
                     type: string
                     format: uint64
@@ -238,13 +243,22 @@ paths:
               comment:
                 type: object
                 properties:
-                  comment:
+                  content:
                     type: array
                     items:
-                      type: string
+                      type: object
+                      properties:
+                        creator:
+                          type: string
+                        comment:
+                          type: string
                   id:
                     type: string
                     format: uint64
+              write:
+                type: array
+                items:
+                  type: string
         default:
           description: An unexpected error response.
           schema:
@@ -46760,10 +46774,15 @@ definitions:
   blogs.blogs.Comment:
     type: object
     properties:
-      comment:
+      content:
         type: array
         items:
-          type: string
+          type: object
+          properties:
+            creator:
+              type: string
+            comment:
+              type: string
       id:
         type: string
         format: uint64
@@ -46804,10 +46823,15 @@ definitions:
       comment:
         type: object
         properties:
-          comment:
+          content:
             type: array
             items:
-              type: string
+              type: object
+              properties:
+                creator:
+                  type: string
+                comment:
+                  type: string
           id:
             type: string
             format: uint64
@@ -46877,13 +46901,22 @@ definitions:
       comment:
         type: object
         properties:
-          comment:
+          content:
             type: array
             items:
-              type: string
+              type: object
+              properties:
+                creator:
+                  type: string
+                comment:
+                  type: string
           id:
             type: string
             format: uint64
+      write:
+        type: array
+        items:
+          type: string
   blogs.blogs.QueryShowingPostResponse:
     type: object
     properties:
@@ -46903,6 +46936,13 @@ definitions:
           id:
             type: string
             format: uint64
+  blogs.blogs.Review:
+    type: object
+    properties:
+      creator:
+        type: string
+      comment:
+        type: string
   blogs.blogs.Title:
     type: object
     properties:

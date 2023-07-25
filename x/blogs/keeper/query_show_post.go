@@ -16,7 +16,8 @@ func (k Keeper) ShowPost(goCtx context.Context, req *types.QueryShowPostRequest)
 	}
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
-
+	var write []string
+	write = append(write, "Hi")
 	// TODO: Process the query
 		post, found := k.GetPost(ctx, req.Id)
 		value, _ := k.GetComment(ctx, req.Id)
@@ -28,5 +29,6 @@ func (k Keeper) ShowPost(goCtx context.Context, req *types.QueryShowPostRequest)
 	return &types.QueryShowPostResponse{
 		post,
 		value,
+		write,
 		}, nil
 }
