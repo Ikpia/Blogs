@@ -18,10 +18,10 @@ func (k msgServer) CreatePost(goCtx context.Context, msg *types.MsgCreatePost) (
 		ctx,
 		post,
 	)
-	var comment = types.Comment{
+	/*var comment = types.Comment{
 		Id:id,
 	}
-	k.SetCommentId(ctx, comment)
+	k.SetCommentId(ctx, comment)*/
 	// TODO: Handling the message
 
 	return &types.MsgCreatePostResponse{

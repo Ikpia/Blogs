@@ -30,10 +30,9 @@ func (k msgServer) WriteComment(goCtx context.Context, msg *types.MsgWriteCommen
 		Comment: msg.Comment,
 	}
 	var content = types.Comment{
-		Id: msg.Id,
+		Id: post.Id,
 	}
 	k.SetComment(ctx, content, comment)//msg.Comment will be replaced by the newly created type
 	// TODO: Handling the message
 	return &types.MsgWriteCommentResponse{}, nil
 }
-

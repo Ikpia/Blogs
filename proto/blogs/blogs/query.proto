@@ -90,4 +90,3 @@ message QueryShowingPostRequest {
 message QueryShowingPostResponse {
   FullPost fullpost = 1 [(gogoproto.nullable) = false];
 }
-
